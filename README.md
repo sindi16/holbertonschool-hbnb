@@ -37,7 +37,7 @@ The system is built in layers to keep things organized and efficient:
 A diagram shows how the main parts connect, like the API, database, and controllers.
 
 
-![alt text](umlpackage.drawio.png)
+        ![alt text](umlpackage.drawio.png)
 
 ### Main Components
 #### User
