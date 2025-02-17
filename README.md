@@ -124,10 +124,6 @@ This sequence diagram illustrates the process of retrieving a list of places bas
 
 ## Diagram  
 ![Fetching Places](list_of_placesdiagram.drawio_480.png)
-
-![alt text](list_of_placesdiagram.drawio_480.png)
-
-
 sequenceDiagram
     participant User
     participant API
