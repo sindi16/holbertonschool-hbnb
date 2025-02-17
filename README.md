@@ -76,8 +76,8 @@ The BaseModel serves as a foundation for all other models, providing shared attr
 ### Description
 A user registers for a new account. The request goes through the Presentation Layer (API), which validates the input and sends it to the Business Logic Layer (User Model). If validation passes, the user data is stored in the database.
 
-### Sequence Diagram (Mermaid.js)
-```mermaid
+### Sequence Diagram
+
 sequenceDiagram
     participant User
     participant API
