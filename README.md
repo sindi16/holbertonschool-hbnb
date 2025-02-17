@@ -68,6 +68,83 @@ The BaseModel serves as a foundation for all other models, providing shared attr
 
 ![alt text](classdiagram.drawio.finish.png)
 
+
+# HBnB API Sequence Diagrams
+
+## 1. User Registration
+
+### Description
+A user registers for a new account. The request goes through the Presentation Layer (API), which validates the input and sends it to the Business Logic Layer (User Model). If validation passes, the user data is stored in the database.
+
+### Sequence Diagram (Mermaid.js)
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant BusinessLogic
+    participant Database
+
+    User->>API: POST /register {user data}
+    API->>BusinessLogic: Validate user data
+    BusinessLogic->>Database: Save user details
+    Database-->>BusinessLogic: Confirm save
+    BusinessLogic-->>API: Return success response
+    API-->>User: Registration successful
+    
+![alt text](<usersequencediagram.drawio_480 (1).png>)
+
+sequenceDiagram
+    participant User
+    participant API
+    participant BusinessLogic
+    participant Database
+
+    User->>API: POST /places {place details}
+    API->>BusinessLogic: Validate and process request
+    BusinessLogic->>Database: Save place details
+    Database-->>BusinessLogic: Confirm save
+    BusinessLogic-->>API: Return success response
+    API-->>User: Place created successfully
+
+![alt text](placesequencediagram.drawio.png)
+
+
+# Fetching a List of Places - Sequence Diagram
+
+## Description  
+This sequence diagram illustrates the process of retrieving a list of places based on user-defined criteria. The request flows through the Presentation Layer (API), Business Logic Layer, and Persistence Layer (Database) to fetch the relevant data.
+
+## Sequence Flow  
+1. **User** sends a `GET /places` request with filtering criteria.  
+2. **API** receives the request and forwards it to the **Business Logic Layer**.  
+3. **Business Logic Layer** processes the request and queries the **Database** for matching places.  
+4. **Database** returns the filtered list of places.  
+5. **Business Logic Layer** formats the data and sends it back to the **API**.  
+6. **API** returns the list of places to the **User**.  
+
+## Diagram  
+![Fetching Places](list_of_placesdiagram.drawio_480.png)
+
+![alt text](list_of_placesdiagram.drawio_480.png)
+
+
+sequenceDiagram
+    participant User
+    participant API
+    participant BusinessLogic
+    participant Database
+
+    User->>API: GET /users/{id}/reviews
+    API->>BusinessLogic: Process request
+    BusinessLogic->>Database: Fetch user reviews
+    Database-->>BusinessLogic: Return reviews
+    BusinessLogic-->>API: Return formatted response
+    API-->>User: Display reviews
+
+![alt text](reviewsequencediagram.drawio.png)
+
+
+
 ### How the API Works
 The API serves as the communication bridge between the different layers of the HBnB system, ensuring seamless data transfer and interaction. It allows users to perform key actions, such as authentication, property management, booking, and reviewing stays. The API follows RESTful principles, ensuring scalability, maintainability, and efficient interaction between clients and the backend.
 
