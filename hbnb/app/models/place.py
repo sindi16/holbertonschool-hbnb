@@ -1,7 +1,7 @@
-from app.models.base import BaseModel
-from app.models.user import User
-from app.models.review import Review
-from app.models.amenity import Amenity
+from hbnb.app.models.base import BaseModel
+from hbnb.app.models.user import User
+from hbnb.app.models.review import Review
+from hbnb.app.models.amenity import Amenity
 
 
 class Place(BaseModel):

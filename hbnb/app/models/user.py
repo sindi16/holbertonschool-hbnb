@@ -1,4 +1,4 @@
-from app.models.base import BaseModel
+from hbnb.app.models.base import BaseModel
 
 
 class User(BaseModel):
