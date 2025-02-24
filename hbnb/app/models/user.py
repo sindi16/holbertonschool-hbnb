@@ -2,11 +2,12 @@ from hbnb.app.models.base import BaseModel
 
 
 class User(BaseModel):
-    def __init__(self, first_name, last_name, email, is_admin=False):
+    def __init__(self, first_name, last_name, email, password, is_admin=False):
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+        self.password = password
         self.is_admin = is_admin
 
     @property
@@ -40,5 +41,31 @@ class User(BaseModel):
         self._email = email
 
     @property
+    def password(self):
+        return self._password
+    
+    @password.setter
+    def password(self, password):
+        if not isinstance(password, str):
+            raise TypeError("Password must be a string")
+        self._password = password
+    
+    @property
     def is_admin(self):
         return self._is_admin
+
+    @is_admin.setter
+    def is_admin(self, is_admin):
+        if not isinstance(is_admin, bool):
+            raise TypeError("is_admin must be a boolean")
+        self._is_admin = is_admin
+
+    def to_dict(self):
+        user_dict = super().to_dict()
+        user_dict.update({
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'is_admin': self.is_admin
+            })
+        return user_dict

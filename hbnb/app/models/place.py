@@ -13,17 +13,17 @@ class Place(BaseModel):
         self.latitude = latitude
         self.longitude = longitude
         self.owner = owner
-        self.reviews = []  # List to store related reviews
-        self.amenities = []  # List to store related amenities
+        self.reviews = []
+        self.amenities = []
 
     @property
     def owner(self):
-        return self._owner
+        return self.owner
 
     @owner.setter
     def owner(self, owner):
         if not isinstance(owner, User):
-            raise TypeError("Owner must be user instance")
+            raise TypeError("Owner must be an instance of User")
         self._owner = owner
 
     @property
@@ -47,7 +47,7 @@ class Place(BaseModel):
         if not isinstance(longitude, (int, float)):
             raise TypeError("Longitude must be a number")
         if longitude < -180 or longitude > 180:
-            raise ValueError("Longitude does not exist")
+            raise ValueError("Longitude is out of bounds")
         self._longitude = longitude
 
     @property
@@ -59,15 +59,31 @@ class Place(BaseModel):
         if not isinstance(latitude, (int, float)):
             raise TypeError("Latitude must be a number")
         if latitude < -90 or latitude > 90:
-            raise ValueError("Latitude does not exist")
+            raise ValueError("Latitude is out of bounds")
         self._latitude = latitude
 
     def add_review(self, review):
         if not isinstance(review, Review):
-            raise TypeError("Review must be an object of review")
+            raise TypeError("Review must be an instance of Review")
         self.reviews.append(review)
 
     def add_amenity(self, amenity):
         if not isinstance(amenity, Amenity):
-            raise TypeError("Amenity must be an object of class Amenity")
+            raise TypeError("Amenity must be an instance of Amenity")
         self.amenities.append(amenity)
+
+    def to_dict(self):
+        place_dict = super().to_dict()
+        place_dict.update({
+            'title': self.title,
+            'description': self.description,
+            'price': self.price,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'owner': self.owner.id,
+            'reviews': self.reviews,
+            'amenities': self.amenities
+            #'reviews': [review.id for review in self.reviews],
+            #'amenities': [amenity.id for amenity in self.amenities]
+        })
+        return place_dict
