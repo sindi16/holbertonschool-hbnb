@@ -59,6 +59,13 @@ class User(BaseModel):
         if not isinstance(is_admin, bool):
             raise TypeError("is_admin must be a boolean")
         self._is_admin = is_admin
+    
+    def update_user(self, user_data):
+        self.first_name = user_data.get('first_name', self.first_name)
+        self.last_name = user_data.get('last_name', self.last_name)
+        self.email = user_data.get('email', self.email)
+        self.password = user_data.get('password', self.password)
+        self.is_admin = user_data.get('is_admin', self.is_admin)
 
     def to_dict(self):
         user_dict = super().to_dict()
@@ -69,3 +76,4 @@ class User(BaseModel):
             'is_admin': self.is_admin
             })
         return user_dict
+    
