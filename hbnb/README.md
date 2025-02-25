@@ -173,3 +173,4 @@ HBnB is a web-based property rental platform that connects users looking for acc
 - **High-Level System Diagram**: Illustrates the major components such as APIs, databases, and controllers, showing their relationships and data flow.
 - **Main Components & Models**: Explains key classes, including User, Place, Review, Amenity, and BaseModel, along with real-world examples of how they are used.
 - **API Interaction Flow**: Covers user interactions such as signing up, logging in, booking properties, and leaving reviews, with sequence diagrams that describe data exchanges.
+
