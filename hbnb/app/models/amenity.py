@@ -1,8 +1,8 @@
-from hbnb.app.models.base import BaseModel
+from app.models.base import BaseModel
 
 class Amenity(BaseModel):
 	def __init__(self, name, description):
-		super.__init__()
+		super().__init__()
 		self.name = name
 		self.description = description
 	
