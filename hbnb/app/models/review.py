@@ -1,62 +1,61 @@
 from app.models.base import BaseModel
 
 class Review(BaseModel):
-	def __init__(self, text, rating, place, user):
-		super.__init__()
-		self.text = text
-		self.rating = rating
-		self.place = place
-		self.user = user
-	
-	@property
-	def text(self):
-		return self._text
-	
-	@text.setter
-	def text(self, text):
-		if not isinstance(text, str):
-			raise TypeError("Text must be a string")
-		self._text = text
-	
-	@property
-	def rating(self):
-		return self._rating
-	
-	@rating.setter
-	def rating(self, rating):
-		if not isinstance(rating, float):
-			raise TypeError("Rating must be a float")
-		if rating < 1 or rating > 5:
-			raise ValueError("Rating must be between 1 and 5")
-		self._rating = rating
-	
-	@property
-	def place(self):
-		return self._place
+    """
+    Review represents feedback provided by a user for a place.
 
-	@place.setter
-	def place(self, place):
-		if not isinstance(place, str):
-			raise TypeError("Place must be a string")
-		self._place = place
-	
-	@property
-	def user(self):
-		return self._user
-	
-	@user.setter
-	def user(self, user):
-		if not isinstance(user, str):
-			raise TypeError("User must be a string")
-		self._user = user
-	
+    Inherits from BaseModel to include id, created_at, and updated_at attributes.
 
-	def to_dict(self):
-		review_dict = super().to_dict()
-		review_dict.update({
-			'text': self.text,
-			'rating': self.rating,
-			'place': self.place,
-			'user': self.user
-            })
-		return review_dict
+    Attributes:
+        text (str): The content of the review.
+        rating (int): The rating given by the user, between 1 and 5.
+        place_id (str): The ID of the place being reviewed.
+        user_id (str): The ID of the user who wrote the review.
+    """
+    def __init__(self, text, rating, place_id, user_id):
+        """
+        Initialize a new instance of Review.
+
+        Args:
+            text (str): The content of the review.
+            rating (int): The rating given by the user, between 1 and 5.
+            place_id (str): The ID of the place being reviewed.
+            user_id (str): The ID of the user who wrote the review.
+
+        Raises:
+            ValueError: If the rating is not between 1 and 5.
+        """
+        super().__init__()
+        self.text = text
+        self.rating = rating
+        self.place_id = place_id
+        self.user_id = user_id
+
+         # Validate the rating upon initialization
+        self.validate_rating()
+
+    def validate_rating(self):
+        """
+        Validate that the rating is within the allowed range of 1 to 5.
+
+        Raises:
+            ValueError: If the rating is not between 1 and 5.
+        """
+        if not (1 <= self.rating <= 5):
+            raise ValueError("Rating must be between 1 and 5")
+
+    def to_dict(self):
+        """
+        Override to_dict to include place_id and user_id.
+
+        Returns:
+            dict: A dictionary containing the review's details, including text, rating, place_id, and user_id.
+        """
+        review_dict = super().to_dict()
+        review_dict.update({
+            "text": self.text,
+            "rating": self.rating,
+            "place_id": self.place_id,
+            "user_id": self.user_id
+        })
+        return review_dict
