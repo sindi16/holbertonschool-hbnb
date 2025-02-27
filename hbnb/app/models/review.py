@@ -1,4 +1,4 @@
-from hbnb.app.models.base import BaseModel
+from app.models.base import BaseModel
 
 class Review(BaseModel):
 	def __init__(self, text, rating, place, user):

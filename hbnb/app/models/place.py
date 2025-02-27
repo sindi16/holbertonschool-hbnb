@@ -1,7 +1,7 @@
-from hbnb.app.models.base import BaseModel
-from hbnb.app.models.user import User
-from hbnb.app.models.review import Review
-from hbnb.app.models.amenity import Amenity
+from app.models.base import BaseModel
+from app.models.user import User
+from app.models.review import Review
+from app.models.amenity import Amenity
 
 
 class Place(BaseModel):
@@ -19,6 +19,14 @@ class Place(BaseModel):
     @property
     def owner(self):
         return self.owner
+    
+    @property
+    def reviews(self):
+        return self.reviews
+    
+    @property
+    def amenities(self):
+        return self.amenities
 
     @owner.setter
     def owner(self, owner):
